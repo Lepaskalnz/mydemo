@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Display a popup on click</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet" />
+<style>
+	body { margin: 0; padding: 0; }
+	#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+<link rel="stylesheet" href="styles1.css">
+</style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1Ijoiem95YTE3MTExOTk4IiwiYSI6ImNrN3g2bXh6NTA4OHkzZnBwNHdjazVmOGYifQ.-c85Z_ArhbK6lBcEHGlWYg';
+var map = new mapboxgl.Map({
+container: 'map',
+style: 'mapbox://styles/mapbox/streets-v11',
+center: [34.0315, 44.5328],
+zoom: 9
+});
+ 
+map.on('load', function() {
+map.addSource('places', {
+'type': 'geojson',
+'data': {
+'type': 'FeatureCollection',
+'features': [
+{
+'type': 'Feature',
+'properties': {
+'description':
+'<strong>Воронцовский дворец</strong><p><a href="https://worontsovpalace.org/" target="_blank" title="Opens in a new window">Воронцовский дворец</a> настоящий архитектурный шедевр, построенный по заказу графа Воронцова.Парк вокруг дворца чудесно дополняет строения. 9:00-17:00 </p>',
+'icon': 'town-hall'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [34.0558, 44.4197]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description':
+'<strong>Гора Ай-Петри</strong><p><a href="https://wikiway.com/russia/gora-ay-petri/" target="_blank" title="Opens in a new window">Гора Ай-Петри</a> является одной из самых красивых и популярных вершин среди туристов. Она входит в состав массива Ай-Петринская яйла, который, в свою очередь, является частью Крымских гор. Сама же Ай-Петри возвышается непосредственно над городом Алупкой и поселком Кореизом, на территории, входящей в Ялтинский горно-лесной заповедник.</p>',
+'icon': 'town-hall'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [34.0604, 44.4515]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description':
+'<strong>Ласточкино гнездо</strong><p><a href="https://замок-ласточкино-гнездо.рф/" target="_blank" title="Opens in a new window">Ласточкино гнездо</a> – средневековый замок из серого камня в готическом стиле с изящными башенками, выстроенный на отвесной Аврориной скале, которая находится в Гаспре – поселке на мысе Ай-Тодор. Это одна из самых высоких скал Южного побережья Крымского полуострова.</p>',
+'icon': 'town-hall'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [34.1285, 44.4307]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description':
+'<strong>Генуэзская крепость</strong><p><a href="http://sudak-museum.ru/" target="_blank" title="Opens in a new window">Генуэзская крепость</a>  в Судаке строилась между 1371 и 1469 годом, на месте другой крепости, Сугдеи, которая, как сообщает греческая рукопись XIII века, была возведена в 212 году. Крепость защищала город, впоследствии известный по русским летописям под именем Сурожа.</p>',
+'icon': 'town-hall'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [34.9584, 44.8418]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description':
+'<strong>Балаклавский подземный музейный комплекс</strong><p><a href="http://muzey-sevastopol.com/820" target="_blank" title="Opens in a new window">Балаклавский подземный музейный комплекс</a> является филиалом Военно-исторического музея фортификационных сооружений. Его местоположение довольно специфично — в 17 километрах от Севастополя, в подземельях горы Таврос, на территории бывшего подземного завода.</p>',
+'icon': 'town-hall'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [33.5961, 44.5006]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description':
+'<strong>Крепость на скале Панеа</strong><p><a href="https://yandex.ru/turbo?text=https%3A%2F%2Fkrymania.ru%2Fpaneetckaya-krepost%2F"_blank" title="Opens in a new window">Крепость на скале Панеа</a> построили генуэзцы в XIV веке. Очевидно, их привлекала небольшая бухточка, расположенная рядом – в ней могли приставать мини-суда. Скала же для строительства была выбрана за рельеф – она сама представляла собой укрепление.</p>',
+'icon': 'town-hall'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [33.9999, 44.4013]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description':
+'<strong>Truckeroo</strong><p><a href="http://www.truckeroodc.com/www/" target="_blank">Truckeroo</a> brings dozens of food trucks, live music, and games to half and M Street SE (across from Navy Yard Metro Station) today from 11:00 a.m. to 11:00 p.m.</p>',
+'icon': 'music'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [-77.007481, 38.876516]
+}
+}
+]
+}
+});
+// Add a layer showing the places.
+map.addLayer({
+'id': 'places',
+'type': 'symbol',
+'source': 'places',
+'layout': {
+'icon-image': '{icon}-15',
+'icon-allow-overlap': true
+}
+});
+ 
+// When a click event occurs on a feature in the places layer, open a popup at the
+// location of the feature, with description HTML from its properties.
+map.on('click', 'places', function(e) {
+var coordinates = e.features[0].geometry.coordinates.slice();
+var description = e.features[0].properties.description;
+ 
+// Ensure that if the map is zoomed out such that multiple
+// copies of the feature are visible, the popup appears
+// over the copy being pointed to.
+while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+}
+ 
+new mapboxgl.Popup()
+.setLngLat(coordinates)
+.setHTML(description)
+.addTo(map);
+});
+ 
+// Change the cursor to a pointer when the mouse is over the places layer.
+map.on('mouseenter', 'places', function() {
+map.getCanvas().style.cursor = 'pointer';
+});
+ 
+// Change it back to a pointer when it leaves.
+map.on('mouseleave', 'places', function() {
+map.getCanvas().style.cursor = '';
+});
+});
+</script>
+ 
+</body>
+</html>

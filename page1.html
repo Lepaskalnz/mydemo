@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html> 
+<head> 
+<style type="text/css">
+	html { height: 100% }
+ 	body { height: 100%; margin: 0px; padding: 0px }
+	#map_canvas { height: 100% }
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #556B2F;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #888;
+}
+</style>
+<script>
+var map;
+  function initialize() {
+     map = new OpenLayers.Map("map_canvas");
+     var mapbase =  new OpenLayers.Layer.ArcGIS93Rest("ArcGIS Server Layer",
+           "http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/export",
+           { layers: "show:0", dpi: 96, FORMAT: "png24" });
+     map.addLayer(mapbase);
+     map.setCenter(new OpenLayers.LonLat(34.2154, 45.2347), 9); 
+ }
+</script>
+</head>
+<body onload="initialize()">
+<style="background-color:White;">
+  
+   <h1 align=center style=color:DarkOliveGreen;">Республика Крым</h1>
+    <ul>
+      <li> <a href="index.html">Назад</a></li>
+    </ul>
+  <script src="http://openlayers.org/api/OpenLayers.js"></script>
+<div id="map_canvas"></div>
+</body>
+</html>
